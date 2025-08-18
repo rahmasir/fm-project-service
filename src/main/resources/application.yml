@@ -9,7 +9,6 @@ spring:
 
   # Database (PostgreSQL) Configuration
   datasource:
-    # Note the different port and database name
     url: jdbc:postgresql://localhost:5433/fm_project_service_db
     username: fm_user
     password: password
@@ -38,9 +37,22 @@ spring:
     host: localhost
     port: 5672
 
+  # Security configuration for JWT validation
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # This URI points to the user service to get the public key for token validation
+          jwk-set-uri: http://localhost:8081/oauth2/jwks
+
 # OpenAPI (Swagger UI) Configuration
 springdoc:
   api-docs:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+# Custom Application Properties
+jwt:
+  # THIS SECRET MUST BE IDENTICAL TO THE ONE IN fm-user-service
+  secret: "tA84oHRygnJ4LF4ARCKuvQ4gcVGxKp8GVeKjcweW8zL5thSw7BEAJgNzGJadgC2k"
